@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cajones</title>
+    <style>
+        .contenedor {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .cajon {
+
+
+            
+            width: 100px;
+            height: 50px;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Manipulación de Cajones</h2>
+    <button onclick="reiniciarCajones()">Reiniciar</button>
+    <button onclick="cambiarColor()">Cambiar Color</button>
+    <button onclick="invertirOrden()">Invertir Orden</button>
+    <button onclick="cambiarTamano()">Cambiar Tamaño</button>
+    <button onclick="cambiarBorde()">Cambiar Borde</button>
+    <button onclick="cambiarImpar()">Cambiar Impar</button>
+    <button onclick="agregarCajon()">Agregar Cajon</button>
+    <button onclick="eliminarCajon()">Eliminar Cajon</button>
+
+
+    <div class="contenedor" id="contenedor">
+        <div class="cajon">Cajón 1</div>
+        <div class="cajon">Cajón 2</div>
+        <div class="cajon">Cajón 3</div>
+        <div class="cajon">Cajón 4</div>
+        <div class="cajon">Cajón 5</div>
+        <div class="cajon">Cajón 6</div>
+
+    </div>
+
+    <script>
+        // Función para cambiar el color de los cajones
+        function cambiarColor() {
+            const colores = ["lightcoral", "lightgreen", "lightblue", "lightpink", "lightyellow", "lightred"];
+            const cajones = document.querySelectorAll(".cajon");
+
+            cajones.forEach(cajon => {
+                const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+                cajon.style.backgroundColor = colorAleatorio;
+                
+                
+            });
+        }
+
+        // Función para invertir el orden de los cajones
+        function invertirOrden() {
+            const contenedor = document.getElementById("contenedor");
+            const cajones = Array.from(contenedor.children).reverse();
+
+            cajones.forEach(cajon => contenedor.appendChild(cajon));
+        }
+
+        //Funcion para Reiniciar cajones
+        function reiniciarCajones(){
+            const cajones = document.querySelectorAll(".cajon");
+            for(let i=0; i<cajones.length; i++){
+                cajones[i].style.backgroundColor="lightblue"
+                cajones[i].innerHTML="Cajón "+(i+1)
+                cajones[i].style.borderSize="0px"
+                cajones[i].style.borderStyle ="none"
+                cajones[i].style.borderColor ="white"
+                cajones[i].style.height="50px"
+                
+            }
+            
+        }
+        //Funcion para Cambiar tamaño
+        function cambiarTamano(){
+            const cajones = document.querySelectorAll(".cajon");
+            cajones[0].style.height="160px";
+            cajones[3].style.height="160px";
+            console.log(cajones[1].style)
+        }
+          //Funcion para Cambiar borde
+          function cambiarBorde(){
+            const cajones = document.querySelectorAll(".cajon");
+            cajones[0].style.borderSize ="1px"
+            cajones[0].style.borderStyle ="solid"
+            cajones[0].style.borderColor ="#000000"
+            
+        }
+        //Funcion para Cambiar el color cada que sea impar
+        function cambiarImpar(){
+            const colores = ["red"];
+            const cajones = document.querySelectorAll(".cajon");
+            for(let i=1; i<cajones.length; i=i+2){
+                cajones[i].style.backgroundColor="red";
+                
+            }
+            
+        }
+        //Funcion crear un boton para agregar un nuevo cajon consecutivamente
+        function agregarCajon(){
+            const contenedor = document.getElementById("contenedor");//Asigno variable contenedor y desde document recibo un elemento por id que me devuelve un string
+            const cajones = document.querySelectorAll(".cajon");//Asigno variable cajones y desde document seleciono todo el query y me devuelve un string que es cajon
+            let ultimaPosicion=0;//Asigno la variable ultimaposicion y la inicializo en cero
+            for (let i = 0; i<cajones.length; i++) {
+                ultimaPosicion =i 
+            }//Hago un ciclo for que recorre el array, i es una variable de control queinicia en cero, se repite siempre y cuando i sea menor que cajones, si esto se cumple i aumenta en uno despues de cada iteraccion.
+            //y por ultimo en la variable ultimaPosicion guardo lo que tengo acomulado y la igualo a mi variable i
+            let cajon = document.createElement("div");// Asigno la variable cajon en document creando un elemento en el bloque de los cajones en la etiqueta div
+                cajon.innerHTML="Cajón"+(ultimaPosicion+1+1)//A cajon.innerHtml le asigno cajon mas la ultima posicion mas 1 para completarlo y le sumo otro para que cambie consecutivamente
+            contenedor.appendChild(cajon)// Desde la variable Contenedor es donde tengo el array de cajones y appendchild tengo la funccion cajon que son los hijos
+            cajon.classList.add("cajon")// Desde la variable cajon llamo a classList y le adiciono un cajon
+ 
+        }
+        //Funcion que Elimine un cajon
+        function eliminarCajon(){
+            const contenedor = document.getElementById("contenedor");
+            const cajones = document.querySelectorAll(".cajon");
+            let eliminar = 0;
+            for (let i = 0; i<cajones.length; i++) {
+                eliminar =i 
+            }
+            let cajon = contenedor.removeChild(cajones[eliminar]);
+              
+        }
+        
+        
+    
+        
+    
+      
+    </script>
+
+</body>
+</html>
