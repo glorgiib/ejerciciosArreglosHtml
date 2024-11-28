@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Cajones</title>
+    <style>
+        .contenedor {
+            display: flex;
+            justify-content: space-between; /* Esto distribuye los dos contenedores a la izquierda y derecha */
+            gap: 20px; /* Espacio entre las dos columnas */
+            margin-top: 20px;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1; /* Esto hace que ocupe todo el espacio disponible */
+        }
+
+        .contenedor-resultado {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 200px; /* Ancho fijo para el contenedor de resultados */
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .cajon {
+            width: 100px;
+            height: 50px;
+            background-color: lightblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .cajon-resultado {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(174, 3, 183);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Ejercicio x</h2>
+    <p>Descripcion</p>
+   
+    <button onclick="ejecutar()">Ejecutar</button>
+
+    <div class="contenedor">
+        <!-- Contenedor principal de los cajones y contenedor de resultados a la derecha -->
+        
+        <div class="contenedor-principal" id="contenedor">
+            <!-- Aquí se agregan los cajones -->
+        </div>
+
+        <div class="contenedor-resultado" id="contenedor-resultado">
+            <!-- Aquí se mostrarán los resultados -->
+        </div>
+    </div>
+
+    <script>
+        function ejecutar() {
+            let arreglo = Array.from(document.querySelectorAll(".cajon")).map(c=>c.textContent);
+            let texto = "";
+            //Escribe tu solucion aqui:
+            arreglo[0]= 'hola ori'
+            arreglo[3]= 'osito lindo'
+            texto = arreglo.length/2
+            arreglo[arreglo.length/2] ="esta es la mitad"
+
+
+            //no tocar
+            imprimirResultado(arreglo, texto);
+        }
+
+        function imprimirResultado(arreglo,texto) {
+            const contenedor = document.getElementById("contenedor-resultado"); // Obtener contenedor de resultados
+
+            // Limpiar el contenedor de resultados antes de agregar nuevos elementos
+            contenedor.innerHTML = "";
+            
+
+            for (let i = 0; i < arreglo.length; i++) {
+                let cajon = document.createElement("div");
+                cajon.innerHTML = arreglo[i];
+                contenedor.appendChild(cajon);
+                cajon.classList.add("cajon-resultado");
+            }
+            const respuesta = document.createElement("div");
+            respuesta.innerHTML = texto;
+            contenedor.appendChild(respuesta);
+        }
+
+        // Inicializar la página con 10 cajones
+        function inicializar() {
+            const contenedor = document.getElementById("contenedor"); // Obtener contenedor principal
+            
+            for (let i = 0; i < 10; i++) {
+                let cajon = document.createElement("div");
+                cajon.innerHTML = (i + 1);
+                contenedor.appendChild(cajon);
+                cajon.classList.add("cajon");
+            }
+        }
+
+        inicializar();
+    </script>
+
+</body>
+</html>
